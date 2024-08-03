@@ -1,31 +1,62 @@
-import { StyleSheet, Text, View, Button, Alert } from "react-native";
-import React from "react";
+import { StyleSheet, Text, View, Image, Button } from 'react-native'
+import React, { useState} from 'react'
+import { styles } from '../Styles/Styles2';
 
-interface ContentProps {
-    fullname: string;
-};
+const ProfileScreen = ():React.JSX.Element => {
 
-const Content: React.FC<ContentProps> = ({ fullname }) => {
-    const handlePress = () => {
-        Alert.alert("Hello", "Tanachot Ketsomboon");
-    };
-    return (
-        <View style={styles.content}>
-            <Text style={styles.text}>{fullname}</Text>
-            <Button title="Click Me" onPress={handlePress} color="blue" />
+    const [profileimage, setimage] = useState(require("../assets/j1.jpg"));
+    const [name, setName] = useState("Tanachot Ketsomboon");
+
+
+    const handlechangeName = ()=>{
+      setName(name == "Tanachot Ketsomboon" ? "PPhetto" : "Tanachot Ketsomboon")
+    }
+
+    const handlechangeimage = ()=>{
+      setimage(profileimage == require("../assets/j1.jpg") ? require("../assets/j2.jpg") : require("../assets/j1.jpg"))
+    }
+
+  return (
+    <View style={styles.container}>
+        <View style={styles.profileContainer}>
+            <Image source={profileimage} style={styles.profileImage} />
+            <View>
+              <Text style={styles.profileName}>{name}</Text>
+              <Button title='Change Name' onPress={handlechangeName}/>
+              <Text>{"\n"}</Text>
+              <Button title='Change image' onPress={handlechangeimage}/>
+            </View>
         </View>
-    );
-};
+    </View>
+  )
+}
 
-export default Content
-const styles = StyleSheet.create({
-    content: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    text: {
-        fontSize: 18,
-        marginBottom: 20,
-    },
-});
+export default ProfileScreen
+
+// const styles = StyleSheet.create({
+//     container:{
+//         alignItems:"center",
+//         padding:20,
+//         backgroundColor:"white",
+//     },
+//     profileimage:{
+//         borderRadius:50,
+//         width:100,
+//         height:100,
+//         marginRight:20,
+//     },
+//     profilecontainer:{
+//         flexDirection:"row",
+//         alignItems:"center",
+//         width:"100%",
+//         padding:20,
+//         borderRadius:10,
+//         backgroundColor:"white",
+//         elevation:5,
+//         marginTop:50,
+//     },
+//     profilename:{
+//         fontSize:18,
+//         color:"blue",
+//     },
+// })
