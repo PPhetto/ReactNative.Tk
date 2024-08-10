@@ -12,8 +12,8 @@ const App = ():React.JSX.Element => {
 
   return (
     <View>
-      <FlastListCallbackend/>
-      {/* <NewsApp/> */}
+      {/* <FlastListCallbackend/> */}
+      <NewsApp/>
     </View>
   );
 };
