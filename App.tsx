@@ -4,14 +4,16 @@ import ProfileScreen from './components/ProfileScreen'
 import Useeffectexample from './components/Useeffectexample'
 import { stylesProfile } from './components/styles'
 import Login from './components/Login';
+import FlastListExample from './components/FlastListExample'
+import FlastListCallbackend from './components/FlastListCallbackend'
+import NewsApp from './components/NewsApp'
 
 const App = ():React.JSX.Element => {
 
   return (
     <View>
-      <ProfileScreen/>
-      <Login/>
-      {/* <Useeffectexample/> */}
+      <FlastListCallbackend/>
+      {/* <NewsApp/> */}
     </View>
   );
 };
