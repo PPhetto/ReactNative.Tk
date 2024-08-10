@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create({
+const styph = StyleSheet.create({
     container:{
         alignItems:"center",
         padding:20,
@@ -27,3 +27,25 @@ export default StyleSheet.create({
         color:"red",
     },
 })
+const stylesProfile = StyleSheet.create({
+        container2: {
+        justifyContent: "center",
+        padding: 20,
+        marginTop: 50,
+        backgroundColor: '#ffffff',
+        borderRadius: 10,
+        elevation: 3,
+        width: '100%',
+    },
+      input: {
+        height: 45,
+        borderColor: "gray",
+        borderWidth: 1,
+        borderRadius: 8,
+        marginBottom: 15,
+        paddingHorizontal: 15,
+        backgroundColor: "#f9f9f9",
+    },
+})
+
+export { stylesProfile, styph };

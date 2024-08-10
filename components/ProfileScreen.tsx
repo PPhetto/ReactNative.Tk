@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, Button } from 'react-native'
 import React, { useState} from 'react'
-import styles from './styles';
+import { stylesProfile, styph } from '../components/styles'
 
 const ProfileScreen = ():React.JSX.Element => {
 
@@ -17,11 +17,11 @@ const ProfileScreen = ():React.JSX.Element => {
     }
 
   return (
-    <View style={styles.container}>
-        <View style={styles.profilecontainer}>
-            <Image source={profileimage} style={styles.profileimage} />
+    <View style={styph.container}>
+        <View style={styph.profilecontainer}>
+            <Image source={profileimage} style={styph.profileimage} />
             <View>
-              <Text style={styles.profilename}>{name}</Text>
+              <Text style={styph.profilename}>{name}</Text>
               <Button title='Change Name' onPress={handlechangeName}/>
               <Text>{"\n"}</Text>
               <Button title='Change image' onPress={handlechangeimage}/>
