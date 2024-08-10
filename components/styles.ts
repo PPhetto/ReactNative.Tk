@@ -47,5 +47,5 @@ const stylesProfile = StyleSheet.create({
         backgroundColor: "#f9f9f9",
     },
 })
-
+//แก้ส่งงานเก่า
 export { stylesProfile, styph };
