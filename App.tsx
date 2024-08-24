@@ -7,13 +7,20 @@ import Login from './components/Login';
 import FlastListExample from './components/FlastListExample'
 import FlastListCallbackend from './components/FlastListCallbackend'
 import NewsApp from './components/NewsApp'
+import AxiosgetData from './components/AxiosgetData'
+import AxiosPostData from './components/AxiosPostData'
+import WeatherLondon from './components/WeatherLondon'
+import WeatherBangkok from './components/WeatherBangkok'
 
 const App = ():React.JSX.Element => {
 
   return (
     <View>
       {/* <FlastListCallbackend/> */}
-      <NewsApp/>
+      {/* <AxiosgetData/> */}
+      {/* <AxiosPostData/> */}
+      {/* <WeatherLondon/> */}
+      <WeatherBangkok/>
     </View>
   );
 };
