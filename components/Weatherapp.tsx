@@ -36,7 +36,6 @@ const Weatherapp = () => {
                 animationType="slide"
                 transparent={true}
                 visible={isModalVisible}
-                onRequestClose={() => setModalVisible(!isModalVisible)}
             >
                 <View style={styles.modalView}>
                     {renderWeatherComponent()}
