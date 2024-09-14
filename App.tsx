@@ -10,6 +10,7 @@ import HomeScreen from './screens/HomeScreen';
 import AboutScreen from './screens/AboutScreen';
 import MenuScreen from './screens/MenuScreen';
 import ProductScreen from './screens/ProductScreen';
+import DetailScreen from './screens/DetailScreen';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -53,10 +54,10 @@ function HomeStrackScreen(){
 function ProducStackScreen(){
   return(
     <ProducStack.Navigator 
-    initialRouteName='Home'
+    initialRouteName='Products'
     screenOptions={{
-      headerStyle:{backgroundColor:'#ffffff'},
-      headerTintColor:'white',
+      // headerStyle:{backgroundColor:'#ffffff'},
+      // headerTintColor:'white',
       headerTitleStyle:{fontWeight:'bold'}
     }}
     >
@@ -66,6 +67,7 @@ function ProducStackScreen(){
       options={{title: 'หน้าหลัก'}}
       />
       <ProducStack.Screen name='Post' component={PostScreen}/>
+      <ProducStack.Screen name='Details' component={DetailScreen}/>
     </ProducStack.Navigator>
   )
 }
