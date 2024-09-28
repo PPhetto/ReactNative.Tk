@@ -1,14 +1,18 @@
 import { View } from 'react-native'
-import React from 'react'
-import { Text, Card, Input, Button } from '@rneui/base';
+import React, { useState } from 'react'
+import { Text, Card, Input, Button, Icon } from '@rneui/base';
 import { yupResolver } from "@hookform/resolvers/yup";
  import * as yup from "yup";
 import { useForm, Controller } from 'react-hook-form';
 import { login } from "../Services/auth-servise";
 import { AxiosError } from "../Services/http service";
 import Toast from 'react-native-toast-message';
+import { setIsLogin } from '../auth/auth-sliec';
+import { useAppDispatch } from '../redux-tolkit/hooks';
 
 const LoginScreen = ():React.JSX.Element => {
+    const [showpassword,setShowPassword] = useState(false);
+    const dispatch = useAppDispatch();
     const schema = yup.object().shape({
         email:yup.string().required("Please input email").email("Email format is invalid"),
         password:yup.string().required("Please input password").min(3,"Password nust be at least 3 character.")
@@ -23,16 +27,17 @@ const LoginScreen = ():React.JSX.Element => {
         try {
             const response = await login(data.email, data.password);
             if(response.status === 200){
-                Toast.show({type:'sucess',text1:'Login Success'})
-                console.log('login success');
+                dispatch(setIsLogin(true));
+                // Toast.show({type:'success',text1:'Login Success'})
+                // console.log('login success');
             }
         } catch (error:any) {
             let err:AxiosError<any> = error;
             if(err.response?.status === 401){
                 Toast.show({type:'error',text1:err.response.data.message})
-                console.log(err.response.data.message);
+                // console.log(err.response.data.message);
             }else{
-                Toast.show({type:'sucess',text1:'เกิดข้อผิดพลาด ไม่สามารถติดต่อ Server ได้'})
+                Toast.show({type:'success',text1:'เกิดข้อผิดพลาด ไม่สามารถติดต่อ Server ได้'})
             }
         }
     }
@@ -63,8 +68,15 @@ const LoginScreen = ():React.JSX.Element => {
                     <Input
                         placeholder='Password'
                         leftIcon={{name:'key'}}
-                        keyboardType='number-pad'
-                        secureTextEntry
+                        rightIcon={
+                            <Icon
+                              name={showpassword?"eye":"eye-off"}
+                              type="feather"
+                              onPress={()=>setShowPassword(!showpassword)}                
+                            />
+                        }
+                        keyboardType="default"
+                        secureTextEntry ={!showpassword}
                         onBlur = {onBlur}
                         onChangeText={onChange}
                         value={value}

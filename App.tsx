@@ -1,10 +1,16 @@
 // Only import react-native-gesture-handler on native platforms
 import 'react-native-gesture-handler';
 
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import { ActivityIndicator, Button, StyleSheet, Text, TextInput, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import {HeaderButtonsProvider} from 'react-navigation-header-buttons';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider } from 'react-redux';
+import { store } from './redux-tolkit/store';
+import { useAppSelector, useAppDispatch } from './redux-tolkit/hooks';
+import { selectAuthState, setIsLogin, setIsLoading, setProfile, } from './auth/auth-sliec';
+import { getProfile } from './Services/auth-servise';
+
 
 import HomeScreen from './screens/HomeScreen';
 import AboutScreen from './screens/AboutScreen';
@@ -96,13 +102,35 @@ function LoginStackSceen(){
 }
 
 const App = ():React.JSX.Element => {
+  const {isLogin,isLoading} = useAppSelector(selectAuthState);
+  const dispatch = useAppDispatch();
 
-  const [isLogin] = useState(false);
-  
+  const checkLogin = async () =>{
+    try {
+      dispatch(setIsLoading(true));
+      const response = await getProfile();
+      if (response?.data.data.user) {
+        dispatch(setProfile(response.data.data.user));
+        dispatch(setIsLogin(true));
+      } else {
+        dispatch(setIsLogin(false));
+      }
+    } catch (error){
+      console.log(error);
+    } finally {
+      dispatch(setIsLoading(false));
+    }
+  }
+  if(isLoading){
+    return(
+      <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+        <ActivityIndicator size='large' color='blue'/>
+
+      </View>
+    )
+  }
   return (
     <>
-      <SafeAreaProvider>
-        <NavigationContainer>
           <HeaderButtonsProvider stackType="native">
 
             {isLogin ? (
@@ -119,11 +147,21 @@ const App = ():React.JSX.Element => {
             }
 
           </HeaderButtonsProvider>
-        </NavigationContainer>
-      </SafeAreaProvider>
       <Toast />
     </>
   );
 };
 
-export default App
+const AppWrapper = ()=>{
+  return(
+    <Provider store={store}>
+          <SafeAreaProvider>
+          <NavigationContainer>
+            <App/>
+          </NavigationContainer>
+          </SafeAreaProvider>
+    </Provider>
+  );
+}
+
+export default AppWrapper
