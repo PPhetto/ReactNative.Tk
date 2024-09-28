@@ -10,8 +10,9 @@ import { selectAuthState, setIsLogin } from '../auth/auth-sliec';
 import { logout } from '../Services/auth-servise';
 
 const HomeScreen = ({ navigation, route }: any): React.JSX.Element => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch(); 
   const {profile} = useAppSelector(selectAuthState);
+  
   const MaterialHeaderButton = (props: any) =>(
     // the `props` here come from <Item ... />
     // you may access them and pass something else to `HeaderButton` if you like
@@ -32,9 +33,10 @@ const HomeScreen = ({ navigation, route }: any): React.JSX.Element => {
       ),
       headerRight:()=>(
         <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
-        <Item title= "logout" iconName= "logout" onPress={async ()=>{
-          await logout();
-          dispatch(setIsLogin(false));
+        <Item title= "logout" iconName= "logout" 
+          onPress={async()=>{
+            await logout();
+            dispatch(setIsLogin(false));
         }}/>
       </HeaderButtons>
       )
@@ -57,10 +59,10 @@ const HomeScreen = ({ navigation, route }: any): React.JSX.Element => {
       <MaterialIcon name="home" size={40} color='pink'/>
       {profile?(
         <>
-         <Text h3> Welcome {profile.name} </Text>
-         <Text>
-          Email: {profile.email} ID: {profile.ig} Role: {profile.Role}
-         </Text>
+          <Text h3> Welcome {profile.name} </Text>
+          <Text> 
+            Email:  {profile.email} ID: {profile.id} Role: {profile.role}
+          </Text>
         </>
       ):null}
       <Button title="About us" onPress={gotoAbout} />

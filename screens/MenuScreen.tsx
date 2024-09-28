@@ -18,7 +18,7 @@ const MenuScreen = ({ navigation }: any): React.JSX.Element => {
                 containerStyle={{ width: "100%", height: 150 }}
             />
             <>
-                <ListItem bottomDivider onPress={()=>{navigation.navigate('HomeStack')}}>
+                <ListItem bottomDivider onPress={()=>{navigation.navigate('Home')}}>
                     <Icon name="home" type="material-community" color="grey" />
                     <ListItem.Content>
                         <ListItem.Title>หน้าหลัก</ListItem.Title>
